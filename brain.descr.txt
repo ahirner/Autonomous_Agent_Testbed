@@ -1,0 +1,12 @@
+eater.brain
+<RecurrentNetwork 'RecurrentNetwork-12'>
+>>> eater.brain.modulesSorted
+[<BiasUnit 'bias'>, <LinearLayer 'in'>, <TanhLayer 'hidden1'>, <LSTMLayer 'Memory'>, <TanhLayer 'hidden0'>, <LinearLayer 'out'>]
+
+>>> eater.brain.connections
+{<BiasUnit 'bias'>:
+[<FullConnection 'FullConnection-8': 'bias' -> 'Memory'>],
+<LinearLayer 'out'>: [], <TanhLayer 'hidden0'>: [<FullConnection 'FullConnection-9': 'hidden0' -> 'out'>],
+<LinearLayer 'in'>: [<FullConnection 'FullConnection-11': 'in' -> 'hidden1'>],
+<LSTMLayer 'Memory'>: [<FullConnection 'FullConnection-10': 'Memory' -> 'hidden0'>],
+<TanhLayer 'hidden1'>: [<FullConnection 'FullConnection-7': 'hidden1' -> 'Memory'>]}
