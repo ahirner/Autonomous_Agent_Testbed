@@ -4,7 +4,7 @@ import pygame
 from pygame.locals import *
 
 import pyconsole
-#import ode
+
 import pylab as pl
 
 
@@ -255,7 +255,6 @@ if __name__ == '__main__':
     platforml = StaticLines(cage_env, [(-18,-4),(-9,-4.5)],0.1,(0,1.0,0.0))
     platformr = StaticLines(cage_env, [(+18,-4),(+9,-4.5)],0.1,(0,1.0,0.0))    
     eater = Eater(cage_env)
-    #eater.fixed_color = (1,1,1)
     
     eater.brain = load_net("Eat_first_attempt.p")
     eater.brain.randomize()

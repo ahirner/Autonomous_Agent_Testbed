@@ -3,8 +3,15 @@
 
 import pygame
 from pygame.locals import *
-def to_pygame_color(color_in): 
-    return pygame.Color(int(color_in[0]*255), int(color_in[1]*255), int(color_in[2]*255))
+def to_pygame_color(color_in):
+    r = color_in[0];
+    g = color_in[1];
+    b = color_in[2];
+    nan = float('nan')
+    if (r == nan or g == nan or b == nan):
+        return pygame.Color(int(color_in[0]*255), int(color_in[1]*255), int(color_in[2]*255))
+    else:
+        return pygame.Color(40,40,40)
 
 import pymunk
 collision_shape_counter = 0
@@ -62,7 +69,7 @@ class StaticLines(Thing):
     def removeFromEnv(self, env):
         env.space.remove_static(self.lines)
     def embedInEnv(self, env):
-        env.space.add_static(self.lines)
+        env.space.add(self.lines)
     def updateState(self, env, dt):
         return None                                             #Do nothing
     def draw(self, env):
@@ -358,7 +365,8 @@ class Eater(Ball, Living):
         self.body.reset_forces()
         force = self.max_force * self.acceleration
         force = pymunk.Vec2d(self.body.rotation_vector) * force
-        self.body.apply_force(force)
+        if force != float('nan'):
+            self.body.apply_force(force)
         #Update sensors
         for s in self.sensors:
             flipy = False
@@ -384,7 +392,7 @@ class Eater(Ball, Living):
             self.inbuf[2+i*4+0] = s.results[0]#-numpy.log(1.-s.results[0]+0.1)
             self.inbuf[2+i*4+1] = s.results[1]#-numpy.log(1.-s.results[1]+0.1)
             self.inbuf[2+i*4+2] = s.results[2]#-numpy.log(1.-s.results[2]+0.1)
-            self.inbuf[2+i*4+3] = -numpy.log(s.results[3])
+            #self.inbuf[2+i*4+3] = -numpy.log(s.results[3])
             i +=1
         #self.outbuf = self.brain.activate(self.inbuf)
             
